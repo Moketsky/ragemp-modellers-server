@@ -1,0 +1,15 @@
+# бинарники ragemp качаются с rage.mp, в репо им не место
+ragemp-server.exe
+BugTrap-x64.dll
+bin/
+dotnet/
+
+# то, что сервер создаёт сам
+maps/
+plugins/
+.listcache
+log/
+
+# сами паки, они у каждого свои
+client_packages/game_resources/dlcpacks/**/*.rpf
+client_packages/game_resources/dlcpacks/**/*.oiv

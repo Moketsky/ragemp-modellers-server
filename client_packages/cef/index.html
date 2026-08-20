@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>modellers menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="no-blur">
+
+<div id="toasts"></div>
+
+<div id="badge" class="badge hidden">
+    <span class="dot"></span>
+    <span>НОУКЛИП</span>
+    <span class="badge-speed" id="badgeSpeed">0.60</span>
+</div>
+
+<div id="panel" class="panel">
+    <div class="head">
+        <div class="head-title">
+            <div class="logo">M</div>
+            <div>
+                <div class="t1">Меню моделлера</div>
+                <div class="t2">клавиша 1 — открыть и закрыть</div>
+            </div>
+        </div>
+        <button class="close" id="btnClose">×</button>
+    </div>
+
+    <div class="tabs">
+        <button class="tab active" data-tab="veh">Транспорт</button>
+        <button class="tab" data-tab="world">Мир</button>
+        <button class="tab" data-tab="player">Игрок</button>
+        <button class="tab" data-tab="gun">Оружие</button>
+        <button class="tab" data-tab="keys">Клавиши</button>
+    </div>
+
+    <div class="body">
+
+        <!-- ТРАНСПОРТ -->
+        <section class="page active" data-page="veh">
+            <div class="label">Модель</div>
+            <div class="row">
+                <input type="text" id="vehModel" placeholder="имя модели или хеш" spellcheck="false">
+            </div>
+            <div class="row gap">
+                <button class="btn primary grow" id="btnSpawn">Заспавнить</button>
+                <button class="btn grow" id="btnSpawnIn">И сесть</button>
+            </div>
+            <div class="row gap">
+                <button class="btn grow" id="btnFix">Починить</button>
+                <button class="btn grow" id="btnDel">Удалить</button>
+                <button class="btn danger grow" id="btnDelAll">Все</button>
+            </div>
+
+            <div class="label mt">Цвет кузова</div>
+            <div class="row gap center">
+                <input type="color" id="col1" value="#1c1c1c">
+                <input type="color" id="col2" value="#1c1c1c">
+                <button class="btn grow" id="btnColor">Покрасить</button>
+            </div>
+
+            <div class="label mt">Последние модели</div>
+            <div class="chips" id="history"><span class="empty">пусто</span></div>
+        </section>
+
+        <!-- МИР -->
+        <section class="page" data-page="world">
+            <div class="label">Ванильная карта GTA</div>
+            <div class="row">
+                <button class="btn grow" id="btnMap">Убрать Лос-Сантос</button>
+            </div>
+            <div class="hint">Снимает ванильные IPL, чтобы своя карта не резалась с игровой. Идёт пачками, пара секунд.</div>
+
+            <div class="label mt">Время <b id="timeValue">12:00</b></div>
+            <input type="range" id="timeHour" min="0" max="23" value="12">
+            <input type="range" id="timeMin" min="0" max="55" step="5" value="0">
+            <div class="chips tight" id="timePresets">
+                <button class="chip" data-h="0">00:00</button>
+                <button class="chip" data-h="6">06:00</button>
+                <button class="chip" data-h="9">09:00</button>
+                <button class="chip" data-h="12">12:00</button>
+                <button class="chip" data-h="16">16:00</button>
+                <button class="chip" data-h="19">19:00</button>
+                <button class="chip" data-h="21">21:00</button>
+            </div>
+
+            <div class="label mt">Погода</div>
+            <div class="grid" id="weathers"></div>
+
+            <div class="label mt">Телепорт по координатам</div>
+            <div class="row gap">
+                <input type="text" id="tpX" placeholder="X" spellcheck="false">
+                <input type="text" id="tpY" placeholder="Y" spellcheck="false">
+                <input type="text" id="tpZ" placeholder="Z" spellcheck="false">
+            </div>
+            <div class="row gap">
+                <button class="btn primary grow" id="btnTp">Телепорт</button>
+                <button class="btn grow" id="btnTpWay">На метку</button>
+            </div>
+            <div class="hint">Z можно не заполнять — высота подберётся по земле.</div>
+        </section>
+
+        <!-- ИГРОК -->
+        <section class="page" data-page="player">
+            <div class="label">Модель педа</div>
+            <div class="row gap">
+                <input type="text" id="skinModel" placeholder="mp_m_freemode_01" spellcheck="false">
+                <button class="btn primary" id="btnSkin">Надеть</button>
+            </div>
+            <div class="row">
+                <button class="btn grow" id="btnSkinReset">Вернуть стандартного</button>
+            </div>
+
+            <div class="label mt">Одежда: компонент / вариант / текстура</div>
+            <div class="row gap">
+                <input type="text" id="clComp" placeholder="комп" value="11" spellcheck="false">
+                <input type="text" id="clDraw" placeholder="вар" value="0" spellcheck="false">
+                <input type="text" id="clTex" placeholder="текс" value="0" spellcheck="false">
+            </div>
+            <div class="row gap">
+                <button class="btn grow" id="btnCloth">Надеть шмот</button>
+                <button class="btn grow" id="btnProp">Надеть проп</button>
+            </div>
+            <div class="hint">Пропы: 0 — голова, 1 — очки, 2 — уши. Вариант -1 снимает.</div>
+
+            <div class="label mt">Ноуклип</div>
+            <div class="row gap center">
+                <button class="btn grow" id="btnNoclip">Включить (H)</button>
+            </div>
+            <div class="label mt">Скорость полёта <b id="speedValue">0.60</b></div>
+            <input type="range" id="speed" min="5" max="500" value="60">
+            <div class="hint">Shift — быстрее, Alt — медленнее, колесо мыши меняет скорость.</div>
+
+            <div class="row mt">
+                <button class="btn grow" id="btnHud">Скрыть интерфейс игры</button>
+            </div>
+        </section>
+
+        <!-- ОРУЖИЕ -->
+        <section class="page" data-page="gun">
+            <div class="label">Оружие и патроны</div>
+            <div class="row gap">
+                <input type="text" id="gunModel" placeholder="weapon_pistol" spellcheck="false">
+                <input type="text" id="gunAmmo" value="500" spellcheck="false" style="max-width: 74px">
+            </div>
+            <div class="row gap">
+                <button class="btn primary grow" id="btnGun">Выдать</button>
+                <button class="btn grow" id="btnGunPack">Набор</button>
+            </div>
+            <div class="row gap">
+                <button class="btn grow" id="btnAmmo">Добить патроны в руки</button>
+                <button class="btn danger" id="btnGunClear">Забрать</button>
+            </div>
+            <div class="hint">Патроны — второе поле. «Набор» выдаёт пистолет, ПП, автомат, дробовик, снайперку и гранату.</div>
+
+            <div class="label mt">Часто нужное</div>
+            <div class="chips" id="gunPresets"></div>
+        </section>
+
+        <!-- КЛАВИШИ -->
+        <section class="page" data-page="keys">
+            <div class="keys">
+                <div class="key-row"><span>1</span><b>меню</b></div>
+                <div class="key-row"><span>H</span><b>ноуклип</b></div>
+                <div class="key-row"><span>J</span><b>телепорт на метку</b></div>
+                <div class="key-row"><span>W A S D</span><b>полёт в ноуклипе</b></div>
+                <div class="key-row"><span>Space / Ctrl</span><b>вверх и вниз</b></div>
+                <div class="key-row"><span>Shift / Alt</span><b>быстрее и медленнее</b></div>
+            </div>
+            <div class="label mt">Команды в чат</div>
+            <div class="keys">
+                <div class="key-row"><span>/tpxyz x y z</span><b>телепорт</b></div>
+                <div class="key-row"><span>/veh модель</span><b>спавн машины</b></div>
+                <div class="key-row"><span>/vehin модель</span><b>спавн и сесть</b></div>
+                <div class="key-row"><span>/dv /dvall /fix</span><b>удалить, все, починить</b></div>
+                <div class="key-row"><span>/skin модель</span><b>сменить педа</b></div>
+                <div class="key-row"><span>/weapon имя патроны</span><b>выдать оружие</b></div>
+                <div class="key-row"><span>/guns /ammo /delweapons</span><b>набор, патроны, забрать</b></div>
+                <div class="key-row"><span>/time ч м</span><b>время</b></div>
+                <div class="key-row"><span>/weather имя</span><b>погода</b></div>
+                <div class="key-row"><span>/tp id</span><b>к игроку</b></div>
+                <div class="key-row"><span>/dim номер</span><b>измерение</b></div>
+                <div class="key-row"><span>/pos</span><b>координаты в чат и буфер</b></div>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="foot">
+        <div class="pos" id="posText">0.00, 0.00, 0.00</div>
+        <button class="btn small" id="btnCopyPos">Копировать</button>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

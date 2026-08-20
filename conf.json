@@ -1,0 +1,16 @@
+{
+    "maxplayers": 32,
+    "name": "Modellers | Live RP",
+    "gamemode": "modellers",
+    "language": "ru",
+    "description": "тестовый сервер для моделлеров и маперов",
+    "url": "",
+    "announce": false,
+    "csharp": "disabled",
+    "port": 22005,
+    "stream-distance": 500,
+    "voice-chat": false,
+    "allow-cef-debugging": true,
+    "disable-client-packages-ram-cache": true,
+    "allow-r-editor": true
+}

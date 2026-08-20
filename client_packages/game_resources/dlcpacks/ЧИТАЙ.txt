@@ -1,0 +1,3 @@
+Сюда кладутся папки с dlc.rpf.
+После этого допиши строку в ../x64/dlcpacks/dlclist.xml:
+<Item>dlcpacks:/имя_папки/</Item>
