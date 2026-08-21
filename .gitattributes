@@ -1,0 +1,5 @@
+* -text
+*.exe binary
+*.dll binary
+*.dat binary
+*.rpf binary

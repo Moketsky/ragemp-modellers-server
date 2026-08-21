@@ -1,9 +1,3 @@
-# бинарники ragemp качаются с rage.mp, в репо им не место
-ragemp-server.exe
-BugTrap-x64.dll
-bin/
-dotnet/
-
 # то, что сервер создаёт сам
 maps/
 plugins/
